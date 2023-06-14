@@ -5,12 +5,19 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+// import java.net.URL;
 
 public class GeradorStickers {
   
-  public void gerarStickers() throws IOException {
+  public void gerarStickers(InputStream inputStream, String nomeArquivo) throws IOException {
     //leitura da imagem "local"
-    BufferedImage imagemOriginal = ImageIO.read(new File("entrada/filme.jpg"));
+    // BufferedImage imagemOriginal = ImageIO.read(new File("entrada/filme.jpg"));
+
+    //leitura da imagem "URL"
+    // InputStream inputStream = new URL("https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_Ratio0.6716_AL_.jpg").openStream();
+
+    BufferedImage imagemOriginal = ImageIO.read(inputStream);
 
     //criar um nova imagem em memória com transparência e com tamanho novo
     int largura = imagemOriginal.getWidth();
@@ -31,11 +38,11 @@ public class GeradorStickers {
     graphics.drawString("TOP 250 FILMES", 200, novaAltura - 80);
    
     //escrever a nova imagem em um arquivo
-    ImageIO.write(novaImagem, "png", new File("saida/figurinha.png"));
+    ImageIO.write(novaImagem, "png", new File("saida/" + nomeArquivo));
   }
 
-  public static void main(String[] args) throws IOException{
-    var gerador = new GeradorStickers();
-    gerador.gerarStickers();
-  }
+  // public static void main(String[] args) throws IOException{
+  //   var gerador = new GeradorStickers();
+  //   gerador.gerarStickers();
+  // }
 }
